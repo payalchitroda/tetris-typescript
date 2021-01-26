@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyledStage } from './styles/StyledStage'
+import './styles.css';
+
 import Cell from './Cell';
 interface StageProps {
     stage: Array<Array<Array<string | number>>>
   };
 
 const Stage = ( {stage}:StageProps) => (
-    <StyledStage>
+    <div className= "StyledStage">
         {stage.map(row => row.map((cell) => <Cell blocktype={cell[0]} />))}
-    </StyledStage>
+    </div>
 );
 export default Stage;

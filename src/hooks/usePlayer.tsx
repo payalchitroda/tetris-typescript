@@ -37,6 +37,8 @@ export const usePlayer = () => {
             collided: false,
         })
     }
+
+    
     const rotate = (matrix: Array<Array<string | number>>) => {
         const mtrx = matrix.map((_, index) => matrix.map(column => {
             console.log(column[index])
