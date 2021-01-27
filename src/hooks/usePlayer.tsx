@@ -43,7 +43,7 @@ export const usePlayer = () => {
 
     const rotate = (matrix: Array<Array<string | number>>) => {
         const mtrx = matrix.map((_, index) => matrix.map(column => {
-            console.log(column[index])
+            // console.log(column[index])
             return column[index]
         }));
         return mtrx.map(row => row.reverse());
@@ -54,8 +54,17 @@ export const usePlayer = () => {
         const clonedPlayer = JSON.parse(JSON.stringify(player));
         clonedPlayer.tetromino = rotate(clonedPlayer.tetromino);
 
-        if (checkCollision(clonedPlayer, stage, 0, 0))
-            return;
+        // console.log(clonedPlayer.pos.x)
+        while (checkCollision(clonedPlayer, stage, 0, 0)) {
+            if (clonedPlayer.pos.x < 0)
+                clonedPlayer.pos.x++
+            else if (clonedPlayer.pos.x >= 9)
+                clonedPlayer.pos.x--
+            else
+                return
+
+        }
+
         setPlayer(clonedPlayer);
     }
 
