@@ -1,0 +1,43 @@
+.header {
+    text-align: center;
+    padding-top: 50px;
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.StyledStage {
+    display: grid;
+    padding-left: 400px;
+    padding-top: 70px;
+    grid-template-rows: repeat(20, 20px);
+    grid-template-columns: repeat(12, 20px);
+}
+
+.StyledTetris {
+    width: 100vw;
+    height: 100vh;
+    background-color: grey;
+}
+
+.right {
+    margin-top: 150px;
+    margin-right: 500px;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.left {
+    float: left;
+}
+
+button:focus {
+    background: rgba(250, 150, 56, 0.952);
+}
+
+button {
+    width: 200px;
+    font-size: 15px;
+    padding: 10px 24px;
+}
