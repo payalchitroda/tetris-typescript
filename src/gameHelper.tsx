@@ -3,20 +3,21 @@ export const STAGE_HEIGHT: number = 20;
 
 
 
-interface point {
+interface Point {
     x: number
     y: number
 }
 
-interface IPlayer {
-    pos: point
-    tetromino: (string | number)[][],
+interface Player {
+    pos: Point
+    tetromino: Array<Array<string | number>>,
     collided: boolean,
 }
 
+type Stage=Array<Array<Array<string | number>>>
 
-export const createStage = ():Array<Array<Array<string | number>>>=> {
-var stage:Array<Array<Array<string | number>>>= new Array(STAGE_HEIGHT);
+export const createStage = ():Stage=> {
+const stage:Stage= new Array(STAGE_HEIGHT);
     for (var i = 0; i < stage.length; i++) {
         stage[i] = new Array(STAGE_WIDTH).fill([0, 'clear'])
     }
@@ -24,7 +25,7 @@ var stage:Array<Array<Array<string | number>>>= new Array(STAGE_HEIGHT);
 
 }
 
-export const checkCollision = (player:IPlayer, stage:Array<Array<Array<string | number>>>,moveX:number,moveY:number ) => {
+export const checkCollision = (player:Player, stage:Stage,moveX:number,moveY:number ) => {
     for (let y = 0; y < player.tetromino.length; y += 1) {
       for (let x = 0; x < player.tetromino[y].length; x += 1) {
         if (player.tetromino[y][x] !== 0) {

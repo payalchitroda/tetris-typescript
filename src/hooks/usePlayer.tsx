@@ -4,20 +4,22 @@ import { STAGE_WIDTH } from '../gameHelper'
 import { checkCollision } from '../gameHelper';
 
 
+type Tetromino = Array<Array<string | number>>
+type Stage=Array<Array<Array<string | number>>>
 
-interface point {
+interface Point {
     x: number
     y: number
 }
 
-interface IPlayer {
-    pos: point
-    tetromino: (string | number)[][],
+interface Player {
+    pos: Point
+    tetromino: Tetromino
     collided: boolean,
 }
 
-export const usePlayer = () => {
-    const [player, setPlayer] = useState<IPlayer>({
+export const usePlayer = ()=> {
+    const [player, setPlayer] = useState<Player>({
         pos: { x: 0, y: 0 },
         tetromino: TETROMINOS[0].shape,
         collided: false,
@@ -41,7 +43,7 @@ export const usePlayer = () => {
     }
 
 
-    const rotate = (matrix: Array<Array<string | number>>) => {
+    const rotate = (matrix: Tetromino) => {
         const mtrx = matrix.map((_, index) => matrix.map(column => {
             // console.log(column[index])
             return column[index]
@@ -50,7 +52,7 @@ export const usePlayer = () => {
 
     }
 
-    const playerRotate = (stage: Array<Array<Array<string | number>>>) => {
+    const playerRotate = (stage: Stage) => {
         const clonedPlayer = JSON.parse(JSON.stringify(player));
         clonedPlayer.tetromino = rotate(clonedPlayer.tetromino);
 
@@ -68,7 +70,7 @@ export const usePlayer = () => {
         setPlayer(clonedPlayer);
     }
 
-    return [player, updatePlayerPos, resetPlayer, playerRotate];
+    return [player, updatePlayerPos, resetPlayer, playerRotate] as const;
 
 
 }

@@ -14,12 +14,12 @@ const Tetris = () => {
   const [gameOver, setGameOver] = useState<boolean>(false)
   const [dropTime, setDropTime] = useState<number>(0);
 
-  const [player, updatePlayerPos, resetPlayer, playerRotate]: Array<any> = usePlayer();
-  const [stage, setStage, rowsCleared]: Array<any> = useStage(player, resetPlayer);
+  const [player, updatePlayerPos, resetPlayer, playerRotate]= usePlayer();
+  const [stage, setStage, rowsCleared]= useStage(player, resetPlayer);
   const [score, setScore] = useGameStatus(rowsCleared);
   const movePlayer = (dir: number) => {
     if (!checkCollision(player, stage, dir, 0)) {
-      updatePlayerPos(dir, 0)
+      updatePlayerPos(dir, 0,false)
     }
 
   }

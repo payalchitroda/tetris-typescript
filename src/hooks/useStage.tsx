@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react'
 import { createStage } from '../gameHelper';
-interface point {
+interface Point {
 x: number
 y: number
 }
 
-interface IPlayer {
-pos: point
+interface Player {
+pos: Point
 tetromino: (string | number)[][],
 collided: boolean,
 }
-
+type Stage=Array<Array<Array<string | number>>>
 type Function = () => void;
-export const useStage = (player:IPlayer,resetPlayer:Function)=> {
-    const [stage, setStage] = useState<Array<Array<Array<string | number>>>>(createStage());
+export const useStage = (player:Player,resetPlayer:Function)=> {
+    const [stage, setStage] = useState<Stage>(createStage());
     const [rowsCleared, setRowsCleared] = useState(0);
 
     useEffect(() => {
         setRowsCleared(0);
-        const sweepRows = (newStage:Array<Array<Array<string | number>>>) =>
-        newStage.reduce((ack:Array<Array<Array<string | number>>>, row) => {
+        const sweepRows = (newStage:Stage) =>
+        newStage.reduce((ack:Stage, row) => {
          
           if (row.findIndex(cell => cell[0] === 0) === -1) {
             setRowsCleared(prev => prev + 1);
@@ -31,7 +31,7 @@ export const useStage = (player:IPlayer,resetPlayer:Function)=> {
         }, [])
 
 
-        const updateStage = (prevStage:Array<Array<Array<string | number>>>) => {
+        const updateStage = (prevStage:Stage) => {
 
             const newStage = prevStage.map(row =>
                 row.map(cell =>(cell[1] === 'clear' ? [0, 'clear'] : cell)));
@@ -62,6 +62,6 @@ export const useStage = (player:IPlayer,resetPlayer:Function)=> {
         setStage(prev => updateStage(prev))
     }, [player])
    
-     return [stage, setStage,rowsCleared];
+     return [stage, setStage,rowsCleared] as const;
 
 }
